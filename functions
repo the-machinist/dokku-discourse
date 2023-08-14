@@ -11,7 +11,8 @@ discourse_create_app() {
     SMTP_ADDRESS="$4" \
     SMTP_PORT="$5" \
     SMTP_USERNAME="$6" \
-    SMTP_PASSWORD="$7"
+    SMTP_PASSWORD="$7" \ 
+    SMTP_DOMAIN="$8"
 
   ## TODO: call plugin functions instead of dokku
   if grep -qxF "$(dokku apps:list 2> /dev/null)" <<< "$APP_NAME"; then
@@ -30,6 +31,7 @@ discourse_create_app() {
   [[ -z "$SMTP_PORT" ]] && SMTP_PORT=$(fn-get-input "SMTP port?" "$(fn-get-env-config DISCOURSE_SMTP_PORT)")
   [[ -z "$SMTP_USERNAME" ]] && SMTP_USERNAME=$(fn-get-input "SMTP user name?" "$(fn-get-env-config DISCOURSE_SMTP_USER_NAME)")
   [[ -z "$SMTP_PASSWORD" ]] && SMTP_PASSWORD=$(fn-get-input "SMTP password?" "$(fn-get-env-config DISCOURSE_SMTP_PASSWORD)")
+  [[ -z "$SMTP_DOMAIN" ]] && SMTP_DOMAIN=$(fn-get-input "SMTP domain?" "$(fn-get-env-config DISCOURSE_SMTP_DOMAIN)")
 
   local APP_STORAGE_ROOT="$STORAGE_ROOT/$APP_NAME"
 
@@ -40,7 +42,8 @@ discourse_create_app() {
     "$SMTP_ADDRESS" \
     "$SMTP_PORT" \
     "$SMTP_USERNAME" \
-    "$SMTP_PASSWORD"
+    "$SMTP_PASSWORD" \
+    "$SMTP_DOMAIN"
 
   fn-update-discourse-build-files
 

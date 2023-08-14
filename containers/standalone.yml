@@ -14,6 +14,7 @@ env:
   DISCOURSE_SMTP_PORT: 587
   DISCOURSE_SMTP_USER_NAME: user@example.com
   DISCOURSE_SMTP_PASSWORD: pa$$word
+  DISCOURSE_SMTP_DOMAIN: mydomain.tld,
 hooks:
   after_code:
     - exec:
