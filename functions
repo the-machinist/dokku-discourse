@@ -11,7 +11,7 @@ discourse_create_app() {
     SMTP_ADDRESS="$4" \
     SMTP_PORT="$5" \
     SMTP_USERNAME="$6" \
-    SMTP_PASSWORD="$7" \ 
+    SMTP_PASSWORD="$7" \
     SMTP_DOMAIN="$8"
 
   ## TODO: call plugin functions instead of dokku
