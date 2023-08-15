@@ -87,7 +87,7 @@ fn-update-discourse-container-config() {
     SMTP_USER_NAME="$7" \
     SMTP_PASSWORD="$8" \
     SMTP_DOMAIN="$9" \
-    NOTIFICATION_EMAIL="$10"
+    NOTIFICATION_EMAIL="${10}"
 
   fn-update-discourse-config-env \
     "$APP_NAME" \
