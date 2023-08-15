@@ -58,10 +58,11 @@ fn-update-discourse-config-env() {
     SMTP_USER_NAME="$6" \
     SMTP_PASSWORD="$7" \
     SMTP_DOMAIN="$8" \
+    NOTIFICATION_EMAIL="$9"
   local CONFIG_FILE_PATH="$DOKKU_ROOT/$APP_NAME/$DISCOURSE_CONTAINER_CONFIG_NAME.yml"
   local UPDATE_ENV_BIN_PATH="$PLUGIN_AVAILABLE_PATH/discourse/containers/update-env"
   local UPDATED_CONFIG
-  UPDATED_CONFIG=$("$UPDATE_ENV_BIN_PATH" "$CONFIG_FILE_PATH" "$HOSTNAME" "$DEVELOPER_EMAILS" "$SMTP_ADDRESS" "$SMTP_PORT" "$SMTP_USER_NAME" "$SMTP_PASSWORD" "$SMTP_DOMAIN" 2> /dev/null)
+  UPDATED_CONFIG=$("$UPDATE_ENV_BIN_PATH" "$CONFIG_FILE_PATH" "$HOSTNAME" "$DEVELOPER_EMAILS" "$SMTP_ADDRESS" "$SMTP_PORT" "$SMTP_USER_NAME" "$SMTP_PASSWORD" "$SMTP_DOMAIN" "$NOTIFICATION_EMAIL" 2> /dev/null)
   [[ -z "$UPDATED_CONFIG" ]] && dokku_log_fail "Error setting env in config"
   echo "$UPDATED_CONFIG" > "$CONFIG_FILE_PATH"
   dokku_log_info1 "Updated '$APP_NAME' discourse env"
@@ -86,6 +87,7 @@ fn-update-discourse-container-config() {
     SMTP_USER_NAME="$7" \
     SMTP_PASSWORD="$8" \
     SMTP_DOMAIN="$9" \
+    NOTIFICATION_EMAIL="$10"
 
   fn-update-discourse-config-env \
     "$APP_NAME" \
@@ -95,7 +97,8 @@ fn-update-discourse-container-config() {
     "$SMTP_PORT" \
     "$SMTP_USER_NAME" \
     "$SMTP_PASSWORD" \
-    "$SMTP_DOMAIN"
+    "$SMTP_DOMAIN" \
+    "$NOTIFICATION_EMAIL"
 
   fn-update-discourse-config-set-volumes "$APP_NAME" "$APP_STORAGE_ROOT"
 

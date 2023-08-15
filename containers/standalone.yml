@@ -15,6 +15,7 @@ env:
   DISCOURSE_SMTP_USER_NAME: user@example.com
   DISCOURSE_SMTP_PASSWORD: pa$$word
   DISCOURSE_SMTP_DOMAIN: mydomain.tld
+  DISCOURSE_NOTIFICATION_EMAIL: user@example.com
 hooks:
   after_code:
     - exec:

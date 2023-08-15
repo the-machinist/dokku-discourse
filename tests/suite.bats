@@ -4,7 +4,7 @@ load test_helper
 
 @test "should create a new discourse app" {
   echo "127.0.0.1 $HOSTNAME" | sudo tee -a /etc/hosts
-  dokku discourse:create "$APP_NAME" "$HOSTNAME" "$DEVELOPER_EMAILS" "$SMTP_ADDRESS" "$SMTP_PORT" "$SMTP_USER_NAME" "$SMTP_PASSWORD" "$SMTP_DOMAIN"
+  dokku discourse:create "$APP_NAME" "$HOSTNAME" "$DEVELOPER_EMAILS" "$SMTP_ADDRESS" "$SMTP_PORT" "$SMTP_USER_NAME" "$SMTP_PASSWORD" "$SMTP_DOMAIN" $"NOTIFICATION_EMAIL"
   grep -qxF "$(dokku apps:list 2> /dev/null)" <<< "$APP_NAME"
 
   # Is discourse actually running?
